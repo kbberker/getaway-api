@@ -20,15 +20,15 @@ class UsersController < ApplicationController
     if @user.save
       render json: @user
     else
-  render json: {error: "Unable to create user"}, status 400
-
+      render json: {error: "Unable to create user"}, status: 400
+    end
   end
 
 
   def signin
     @user = User.find_by(email: params[:email])
     if @user && @user.authenticate(params[:password])
-      render json: {message: 'it did work'}
+      render json: @user
     else
       render json: {error: "Username/password combination invalid."}, status: 400
     end
